@@ -1,0 +1,58 @@
+SmartSpend – Personal Expense Management System
+SmartSpend is a full-stack web application that helps users track daily expenses, manage budgets, and gain insights into spending habits using visual analytics and smart budgeting suggestions.
+
+Live Demo: https://smartspend-enpq.onrender.com
+
+📌 Features:
+
+🔐 Authentication
+User Signup & Login
+Session stored using Local Storage
+
+💰 Expense Management
+Add daily expenses
+Delete transactions
+View complete history
+
+📊 Dashboard & Analytics
+Total spending overview
+Interactive doughnut chart (Chart.js)
+Category-wise expense breakdown
+
+📈 Budget Management
+Set monthly budget
+Track remaining balance
+Visual feedback for overspending
+
+🤖 Smart Suggestion(50-30-20 Rule)
+Enter monthly income
+Get AI-style budget suggestions:
+50% Needs
+30% Wants
+20% Savings
+
+📄 PDF Report Generation
+Download full expense report
+Includes:
+User details
+Total spend
+Transaction table
+
+🛠️ Tech Stack:
+
+Frontend
+HTML5
+CSS3
+JavaScript (Vanilla)
+Chart.js
+jsPDF
+
+Backend
+Node.js
+Express.js
+
+Database
+MongoDB Atlas
+
+Deployment
+Render (Full-stack hosting)
