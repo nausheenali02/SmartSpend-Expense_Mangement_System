@@ -77,5 +77,60 @@ async function deleteExpense(id) {
         if (response.ok) fetchExpenses();
     } catch (error) { alert("Error"); }
 }
+function updateUIList(desc, amount, id) {
+    const list = document.getElementById("expenseList");
+    const li = document.createElement("li");
+    li.id = `exp-${id}`;
+    li.innerHTML = `
+        <div class="exp-details">
+            <span class="exp-name">${desc}</span>
+            <span class="exp-price">₹${amount}</span>
+        </div>
+        <button class="delete-btn-red" onclick="deleteExpense('${id}')">Delete</button>
+    `;
+    list.appendChild(li);
+}
 
-// (बाकी code SAME रहेगा — no change needed)
+function resetAddForm() {
+    document.getElementById("desc").value = "";
+    document.getElementById("amount").value = "";
+    document.getElementById("input-container").style.display = "block";
+    document.getElementById("success-container").style.display = "none";
+}
+
+function setBudget() {
+    const val = parseFloat(document.getElementById("budgetInput").value);
+    if (isNaN(val) || val <= 0) return;
+    budget = val;
+    localStorage.setItem("userBudget", budget);
+    document.getElementById("currentBudgetText").innerText = `Current Budget: ₹${budget}`;
+    updateRemaining();
+    alert("Budget Updated!");
+}
+
+function resetBudget() {
+    budget = 0;
+    localStorage.removeItem("userBudget");
+    document.getElementById("currentBudgetText").innerText = `Current Budget: ₹0`;
+    document.getElementById("remaining").innerText = "Set Budget First";
+}
+
+function updateRemaining() {
+    const remDisplay = document.getElementById("remaining");
+    if (budget > 0) {
+        const rem = budget - total;
+        remDisplay.innerText = `₹${rem}`;
+        remDisplay.style.color = rem < 0 ? "#f43f5e" : "#6366f1";
+    } else { remDisplay.innerText = "Set Budget First"; }
+}
+
+function showSection(sectionId) {
+    if (sectionId === 'add-expense') resetAddForm();
+    if (sectionId === 'history' || sectionId === 'overview') fetchExpenses();
+    document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
+    document.getElementById(sectionId).style.display = "block";
+    document.querySelectorAll(".sidebar li").forEach(li => li.classList.remove("active"));
+    document.getElementById(`nav-${sectionId}`).classList.add("active");
+}
+
+function logout() { localStorage.clear(); window.location.href ="auth.html"; }
