@@ -1,0 +1,10 @@
+/* auth.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+body { margin: 0; font-family: "Poppins", sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
+.container { background: #ffffff; padding: 50px 40px; border-radius: 32px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05); text-align: center; width: 380px; }
+h2 { font-size: 28px; color: #1e293b; margin-bottom: 8px; }
+input { width: 100%; padding: 16px; margin: 10px 0; border-radius: 16px; border: 1px solid #e2e8f0; background: #f8fafc; box-sizing: border-box; }
+input:focus { outline: none; border-color: #6366f1; background: #fff; }
+button { width: 100%; padding: 16px; background: #6366f1; color: white; border: none; border-radius: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+button:hover { background: #4f46e5; transform: translateY(-2px); }
+.toggle { margin-top: 25px; color: #64748b; cursor: pointer; }

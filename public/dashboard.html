@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartSpend | Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="logo">SmartSpend</div>
+            <ul>
+                <li class="active" id="nav-overview" onclick="showSection('overview')">Overview</li>
+                <li id="nav-add-expense" onclick="showSection('add-expense')">Add Expense</li>
+                <li id="nav-history" onclick="showSection('history')">History</li>
+                <li id="nav-budget" onclick="showSection('budget')">Budget</li>
+            </ul>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </nav>
+
+        <main class="content">
+            <header>
+                <h1 id="welcomeMessage">Welcome back!</h1>
+                <p>Smart Spending Starts Here</p>
+            </header>
+
+            <section id="overview" class="section">
+                <div class="stats-grid">
+                    <div class="card">
+                        <h3>Total Spent</h3>
+                        <p class="amount">₹<span id="total">0</span></p>
+                    </div>
+                    <div class="card clickable-card" onclick="showSection('budget')">
+                        <h3>Remaining Budget</h3>
+                        <p class="amount"><span id="remaining">Set Budget First</span></p>
+                    </div>
+                </div>
+
+                <div class="chart-container-full">
+                    <h3>Spending Breakdown</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="add-expense" class="section" style="display:none;">
+                <div class="card add-card" id="input-container">
+                    <h3>Add New Transaction</h3>
+                    <input type="text" id="desc" placeholder="What did you buy?">
+                    <input type="number" id="amount" placeholder="Amount (₹)">
+                    <button onclick="addExpense()">Add Transaction</button>
+                </div>
+                <div class="card add-card" id="success-container" style="display:none; text-align: center;">
+                    <h3 style="color: #10b981;">Transaction Added! ✅</h3>
+                    <button onclick="resetAddForm()" style="margin-top: 15px;">Add More</button>
+                    <button onclick="showSection('overview')" style="background: #f1f5f9; color: #6366f1; margin-top: 10px;">Go to Overview</button>
+                </div>
+            </section>
+
+            <section id="history" class="section" style="display:none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>Transaction History</h3>
+                    <button onclick="exportToPDF()" style="width: auto; padding: 10px 20px; background: #1e293b; font-size: 13px;">Download PDF Report</button>
+                </div>
+                <ul id="expenseList" class="history-list"></ul>
+            </section>
+
+            <section id="budget" class="section" style="display:none;">
+                <h3 style="margin-bottom: 25px;">Monthly Budget Management</h3>
+                <div class="card">
+                    <p id="currentBudgetText" style="margin-bottom: 15px; font-weight: 600;">Current Budget: ₹0</p>
+                    
+                    <div id="ai-budget-box" style="background: #eef2ff; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--primary);">
+                        <p style="font-size: 13px; color: var(--primary); font-weight: 700;">💡 SMART SUGGESTION (50-30-20 Rule)</p>
+                        <p id="smart-suggestion-text" style="font-size: 14px; margin-top: 5px; color: #475569;">Enter your total income to see recommended limits.</p>
+                        <input type="number" id="incomeInput" placeholder="Enter Monthly Income (₹)" style="margin-top: 10px; font-size: 13px; padding: 10px;" oninput="calculateSmartBudget()">
+                    </div>
+
+                    <input type="number" id="budgetInput" placeholder="Enter fixed monthly limit (₹)">
+                    <button onclick="setBudget()" style="margin-bottom: 10px;">Save Budget</button>
+                    <button onclick="resetBudget()" class="reset-btn">Delete Budget</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartSpend | Secure Login</title>
+    <link rel="stylesheet" href="auth.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h2 id="formTitle">Login</h2>
+        <p id="formSubtitle">Access your smart dashboard</p>
+
+        <div class="form-group">
+            <input type="text" id="username" placeholder="Username" style="display:none;">
+            
+            <input type="email" id="email" placeholder="Email Address">
+            
+            <input type="password" id="password" placeholder="Password">
+            
+            <button onclick="handleAuth()">Continue</button>
+        </div>
+
+        <p class="toggle" onclick="toggleForm()">Don't have an account? Sign up</p>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Initialize icons if you decide to add them to buttons/inputs
+        lucide.createIcons();
+    </script>
+</body>
+</html>
